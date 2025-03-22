@@ -19,32 +19,34 @@ import Chat from "./pages/Chat";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
+const App = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Header />
-        <AnimatePresence mode="wait">
-          <main className="pt-16 md:pt-20">
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/community" element={<Community />} />
-              <Route path="/marketplace" element={<Marketplace />} />
-              <Route path="/skills-exchange" element={<SkillsExchange />} />
-              <Route path="/microjobs" element={<Microjobs />} />
-              <Route path="/profile/:id" element={<Profile />} />
-              <Route path="/friends" element={<Friends />} />
-              <Route path="/chat/:id?" element={<Chat />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
-        </AnimatePresence>
-        <Footer />
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <Header />
+          <AnimatePresence mode="wait">
+            <main className="pt-16 md:pt-20">
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/community" element={<Community />} />
+                <Route path="/marketplace" element={<Marketplace />} />
+                <Route path="/skills-exchange" element={<SkillsExchange />} />
+                <Route path="/microjobs" element={<Microjobs />} />
+                <Route path="/profile/:id" element={<Profile />} />
+                <Route path="/friends" element={<Friends />} />
+                <Route path="/chat/:id?" element={<Chat />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
+          </AnimatePresence>
+          <Footer />
+        </TooltipProvider>
       </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+    </QueryClientProvider>
+  );
+};
 
 export default App;
