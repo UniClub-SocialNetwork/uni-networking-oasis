@@ -36,7 +36,7 @@ const App = () => {
                   <div className="fb-layout">
                     <Sidebar />
                     <div className="fb-content">
-                      <Index />
+                      <Community />
                     </div>
                     <Contacts />
                   </div>
