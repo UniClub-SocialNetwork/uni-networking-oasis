@@ -2,12 +2,15 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, Bell, MessageCircle, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [notifications, setNotifications] = useState(3);
+  const [messages, setMessages] = useState(2);
   const location = useLocation();
   
   useEffect(() => {
@@ -24,6 +27,7 @@ const Header = () => {
     { name: 'Marketplace', path: '/marketplace' },
     { name: 'Intercambio', path: '/skills-exchange' },
     { name: 'UniGigs', path: '/microjobs' },
+    { name: 'Amigos', path: '/friends' },
   ];
   
   const navVariants = {
@@ -54,14 +58,14 @@ const Header = () => {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <span className="text-xl md:text-2xl font-display font-bold text-cluber-700">
+            <span className="text-xl md:text-2xl font-display font-bold text-cluber-600">
               Cluber
             </span>
           </Link>
           
           {/* Desktop Navigation */}
           <motion.nav 
-            className="hidden md:flex space-x-8"
+            className="hidden md:flex space-x-6"
             initial="hidden"
             animate="visible"
             variants={navVariants}
@@ -88,25 +92,81 @@ const Header = () => {
             ))}
           </motion.nav>
           
-          {/* Auth Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
+          {/* User Menu (Desktop) */}
+          <div className="hidden md:flex items-center space-x-3">
             <Button
-              variant="outline"
-              size="sm"
-              className="font-medium"
+              variant="ghost"
+              size="icon"
+              className="relative"
+              aria-label="Notifications"
+              asChild
             >
-              Iniciar Sesión
+              <Link to="/notifications">
+                <Bell className="h-5 w-5" />
+                {notifications > 0 && (
+                  <span className="absolute top-0 right-0 w-4 h-4 bg-cluber-600 text-white rounded-full text-xs flex items-center justify-center">
+                    {notifications}
+                  </span>
+                )}
+              </Link>
             </Button>
+            
             <Button
-              size="sm"
-              className="bg-cluber-600 hover:bg-cluber-700 text-white font-medium"
+              variant="ghost"
+              size="icon"
+              className="relative"
+              aria-label="Messages"
+              asChild
             >
-              Registrarse
+              <Link to="/chat">
+                <MessageCircle className="h-5 w-5" />
+                {messages > 0 && (
+                  <span className="absolute top-0 right-0 w-4 h-4 bg-cluber-600 text-white rounded-full text-xs flex items-center justify-center">
+                    {messages}
+                  </span>
+                )}
+              </Link>
             </Button>
+            
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Friends"
+              asChild
+            >
+              <Link to="/friends">
+                <Users className="h-5 w-5" />
+              </Link>
+            </Button>
+            
+            <Link to="/profile/me" className="ml-2">
+              <Avatar className="cursor-pointer h-8 w-8 border-2 border-cluber-600">
+                <AvatarImage src="https://placehold.co/100x100?text=Me" />
+                <AvatarFallback className="bg-cluber-600 text-white">
+                  Me
+                </AvatarFallback>
+              </Avatar>
+            </Link>
           </div>
           
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-2">
+            <Link to="/chat" className="relative">
+              <MessageCircle className="h-5 w-5" />
+              {messages > 0 && (
+                <span className="absolute -top-1 -right-1 w-4 h-4 bg-cluber-600 text-white rounded-full text-xs flex items-center justify-center">
+                  {messages}
+                </span>
+              )}
+            </Link>
+            
+            <Link to="/profile/me" className="mr-2">
+              <Avatar className="h-8 w-8 border-2 border-cluber-500">
+                <AvatarImage src="https://placehold.co/100x100?text=Me" />
+                <AvatarFallback className="bg-cluber-600 text-white">Me</AvatarFallback>
+              </Avatar>
+            </Link>
+            
             <Button
               variant="ghost"
               size="icon"
@@ -144,17 +204,32 @@ const Header = () => {
                   {item.name}
                 </Link>
               ))}
-              <div className="pt-4 flex flex-col space-y-3">
+              <div className="pt-4 flex items-center justify-between">
+                <div className="flex gap-4">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="relative"
+                  >
+                    <Bell className="h-5 w-5" />
+                    {notifications > 0 && (
+                      <span className="absolute -top-1 -right-1 w-4 h-4 bg-cluber-600 text-white rounded-full text-xs flex items-center justify-center">
+                        {notifications}
+                      </span>
+                    )}
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="relative"
+                  >
+                    <Users className="h-5 w-5" />
+                  </Button>
+                </div>
                 <Button
-                  variant="outline"
-                  className="w-full justify-center font-medium"
+                  className="bg-cluber-600 hover:bg-cluber-700 text-white"
                 >
-                  Iniciar Sesión
-                </Button>
-                <Button
-                  className="w-full justify-center bg-cluber-600 hover:bg-cluber-700 text-white font-medium"
-                >
-                  Registrarse
+                  Crear Publicación
                 </Button>
               </div>
             </nav>

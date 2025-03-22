@@ -13,6 +13,9 @@ import Marketplace from "./pages/Marketplace";
 import SkillsExchange from "./pages/SkillsExchange";
 import Microjobs from "./pages/Microjobs";
 import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
+import Friends from "./pages/Friends";
+import Chat from "./pages/Chat";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +34,9 @@ const App = () => (
               <Route path="/marketplace" element={<Marketplace />} />
               <Route path="/skills-exchange" element={<SkillsExchange />} />
               <Route path="/microjobs" element={<Microjobs />} />
+              <Route path="/profile/:id" element={<Profile />} />
+              <Route path="/friends" element={<Friends />} />
+              <Route path="/chat/:id?" element={<Chat />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
