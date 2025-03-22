@@ -4,13 +4,12 @@ import {
   Users, 
   ShoppingBag, 
   Briefcase, 
-  Exchange, 
+  ArrowLeftRight, 
   Bookmark, 
   Calendar, 
   Video, 
   Clock, 
-  ChevronDown,
-  ArrowLeftRight as Exchange
+  ChevronDown
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
@@ -21,7 +20,7 @@ const Sidebar = () => {
   const mainLinks = [
     { name: 'Amigos', path: '/friends', icon: Users },
     { name: 'Marketplace', path: '/marketplace', icon: ShoppingBag },
-    { name: 'Intercambio', path: '/skills-exchange', icon: Exchange },
+    { name: 'Intercambio', path: '/skills-exchange', icon: ArrowLeftRight },
     { name: 'UniGigs', path: '/microjobs', icon: Briefcase },
   ];
   
