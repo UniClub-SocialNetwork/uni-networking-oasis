@@ -3,7 +3,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Star, Clock, BookOpen, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 
 interface ServiceCardProps {
   title: string;
@@ -101,9 +100,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
             <div className="flex items-center">
               <p className="text-sm font-medium text-gray-900">{sellerName}</p>
               {verified && (
-                <span className="ml-1" title="Verificado">
-                  <Award className="h-4 w-4 text-cluber-600" />
-                </span>
+                <Award className="h-4 w-4 text-cluber-600 ml-1" title="Verificado" />
               )}
             </div>
             <div className="flex items-center">
