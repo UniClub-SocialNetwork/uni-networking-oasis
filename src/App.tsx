@@ -6,6 +6,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Header from "./components/layout/Header";
+import Sidebar from "./components/layout/Sidebar";
+import Contacts from "./components/layout/Contacts";
 import Footer from "./components/layout/Footer";
 import Index from "./pages/Index";
 import Community from "./pages/Community";
@@ -28,10 +30,26 @@ const App = () => {
           <Sonner />
           <Header />
           <AnimatePresence mode="wait">
-            <main className="pt-16 md:pt-20">
+            <main className="pt-16 md:pt-20 bg-background min-h-screen">
               <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/community" element={<Community />} />
+                <Route path="/" element={
+                  <div className="fb-layout">
+                    <Sidebar />
+                    <div className="fb-content">
+                      <Community />
+                    </div>
+                    <Contacts />
+                  </div>
+                } />
+                <Route path="/community" element={
+                  <div className="fb-layout">
+                    <Sidebar />
+                    <div className="fb-content">
+                      <Community />
+                    </div>
+                    <Contacts />
+                  </div>
+                } />
                 <Route path="/marketplace" element={<Marketplace />} />
                 <Route path="/skills-exchange" element={<SkillsExchange />} />
                 <Route path="/microjobs" element={<Microjobs />} />
@@ -42,7 +60,6 @@ const App = () => {
               </Routes>
             </main>
           </AnimatePresence>
-          <Footer />
         </TooltipProvider>
       </BrowserRouter>
     </QueryClientProvider>
